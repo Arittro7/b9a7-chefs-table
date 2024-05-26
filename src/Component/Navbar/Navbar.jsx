@@ -32,7 +32,7 @@ const Navbar = () => {
 
 
   {/* Search and User Icon */}
-  <div className="navbar-end">
+  <div className="navbar-end items-center">
   <input type="text" placeholder="Search" className="input input-bordered input-primary w-[212px] max-w-xs my-3 mx-6" />
   <img className='w-12 ml-4 bg-green-400 rounded-full p-2' src={user} alt="" />
   </div>
