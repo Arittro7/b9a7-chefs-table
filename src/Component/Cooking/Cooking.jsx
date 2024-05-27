@@ -1,19 +1,24 @@
+import { useState } from "react";
+import CurrentlyCook from "../CurrentlyCook/CurrentlyCook";
 import WantToCook from "../WantToCook/WantToCook";
 import PropTypes from "prop-types";
 
 const Cooking = ({ cook }) => {
-  // const{recipe_name, preparing_time, calories} = cook
+
+  const[nowCooking, setNowCooking] = useState([]);
+
+  const handleAddToPrepare = recipe => {
+    // console.log(recipe);
+    const newNowCooking = [...nowCooking, recipe]
+    setNowCooking(newNowCooking)
+  }
 
   return (
     <div className="md: w-1/3 max-w-[514px] border-2 border-red-400">
       <div>
-        <h2 className="text-2xl p-6 text-center">Want to Cook: </h2>
-        {/* table heading */}
-        {/* <div className="flex gap-16 ml-16">
-        <h2>Name</h2>
-        <h2>Time</h2>
-        <h2>Calories</h2>
-      </div> */}
+        <h2 className="text-2xl font-bold p-6 text-center">
+          Want to Cook: {cook.length}
+        </h2>
         <div className="max-w-md mx-auto py-2 px-6">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
@@ -21,13 +26,16 @@ const Cooking = ({ cook }) => {
                 <th className="text-left">Name</th>
                 <th className="text-left">Time</th>
                 <th className="text-left">Calories</th>
-                </tr>
+              </tr>
             </thead>
           </table>
         </div>
         {cook.map((wantToCook, idx) => (
-          <WantToCook key={idx} wantToCook={wantToCook}></WantToCook>
+          <WantToCook key={idx} handleAddToPrepare={handleAddToPrepare} wantToCook={wantToCook}></WantToCook>
         ))}
+      </div>
+      <div>
+        <CurrentlyCook nowCooking={nowCooking}></CurrentlyCook>
       </div>
     </div>
   );
